@@ -1,0 +1,5 @@
+{
+  "name": "VayuDoot AQI",
+  "description": "VayuDoot is a professional-grade Air Quality Index (AQI) measurement and analysis tool that calculates real-time pollution levels based on your local data and provides AI-powered health insights.",
+  "requestFramePermissions": []
+}
