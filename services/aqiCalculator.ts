@@ -1,5 +1,4 @@
-
-import { PollutantData, AQIResult, AQICategory } from '../types';
+import { PollutantData, AQIResult, AQICategory } from '../types.ts';
 
 const getSubIndex = (value: number, breaks: number[], aqiBreaks: number[]): number => {
   for (let i = 0; i < breaks.length - 1; i++) {

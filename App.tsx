@@ -1,13 +1,12 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
-import { PollutantData, AQIResult, AIAnalysis } from './types';
+import { PollutantData, AQIResult, AIAnalysis } from './types.ts';
 import { INITIAL_DATA } from './constants.tsx';
-import { calculateAQI } from './services/aqiCalculator';
-import { getAIAnalysis } from './services/geminiService';
-import Header from './components/Header';
-import PollutantInput from './components/PollutantInput';
-import AQIDisplay from './components/AQIDisplay';
-import AIInsights from './components/AIInsights';
+import { calculateAQI } from './services/aqiCalculator.ts';
+import { getAIAnalysis } from './services/geminiService.ts';
+import Header from './components/Header.tsx';
+import PollutantInput from './components/PollutantInput.tsx';
+import AQIDisplay from './components/AQIDisplay.tsx';
+import AIInsights from './components/AIInsights.tsx';
 import { RefreshCcw, Calculator, Zap, Wind, MapPin, Clock, Calendar as CalendarIcon, LayoutDashboard } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -16,12 +15,10 @@ const App: React.FC = () => {
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  // Split timestamp state for the UI components
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [selectedHour, setSelectedHour] = useState(new Date().getHours().toString().padStart(2, '0'));
   const [selectedMinute, setSelectedMinute] = useState(new Date().getMinutes().toString().padStart(2, '0'));
 
-  // Sync state back to the pollutants object when UI parts change
   useEffect(() => {
     const combinedTimestamp = `${selectedDate}T${selectedHour}:${selectedMinute}`;
     setPollutants(prev => ({ ...prev, timestamp: combinedTimestamp }));
@@ -68,7 +65,6 @@ const App: React.FC = () => {
       <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column: Input Form */}
           <div className="lg:col-span-6 space-y-6">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-2xl font-black text-gray-900 flex items-center gap-2">
@@ -84,9 +80,7 @@ const App: React.FC = () => {
               </button>
             </div>
 
-            {/* Context Inputs: Location & Timestamp */}
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 bg-white p-5 rounded-3xl border border-gray-100 shadow-sm">
-               {/* Location Input */}
                <div className="sm:col-span-12 space-y-2">
                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5 px-1">
                    <MapPin className="w-3 h-3 text-orange-500" />
@@ -101,7 +95,6 @@ const App: React.FC = () => {
                  />
                </div>
 
-               {/* Date Input */}
                <div className="sm:col-span-6 space-y-2">
                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5 px-1">
                    <CalendarIcon className="w-3 h-3 text-orange-500" />
@@ -115,7 +108,6 @@ const App: React.FC = () => {
                  />
                </div>
 
-               {/* Time Dropdowns */}
                <div className="sm:col-span-6 space-y-2">
                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5 px-1">
                    <Clock className="w-3 h-3 text-orange-500" />
@@ -225,7 +217,6 @@ const App: React.FC = () => {
             </button>
           </div>
 
-          {/* Right Column: Results & AI */}
           <div className="lg:col-span-6 space-y-8">
             {!result ? (
               <div className="bg-white border border-gray-100 rounded-3xl p-16 flex flex-col items-center justify-center text-center space-y-6 shadow-sm min-h-[500px]">
