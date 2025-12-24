@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Wind, ShieldAlert, Heart, Info, AlertTriangle, AlertCircle } from 'lucide-react';
-import { AQICategory } from './types';
+import { AQICategory } from './types.ts';
 
 export const AQI_LEVELS = {
   [AQICategory.GOOD]: {

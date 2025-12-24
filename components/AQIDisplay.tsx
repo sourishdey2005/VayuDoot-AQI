@@ -1,7 +1,6 @@
-
 import React from 'react';
-import { AQIResult } from '../types';
-import { AQI_LEVELS } from '../constants';
+import { AQIResult } from '../types.ts';
+import { AQI_LEVELS } from '../constants.tsx';
 import { MapPin, Calendar, Activity, BarChart3, PieChart as PieIcon, Hexagon } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
