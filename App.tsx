@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import { PollutantData, AQIResult, AIAnalysis } from './types.ts';
 import { INITIAL_DATA } from './constants.tsx';
@@ -264,7 +265,7 @@ const App: React.FC = () => {
               <span>API Status</span>
             </div>
             <p className="text-[10px] text-gray-300 font-bold uppercase tracking-[0.2em]">
-              © 2024 VayuDoot • Engineered with Gemini 3 Pro
+              © 2024 VayuDoot
             </p>
           </div>
         </div>

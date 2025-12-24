@@ -2,7 +2,18 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { AQIResult, PollutantData, AIAnalysis } from "../types.ts";
 
 export const getAIAnalysis = async (aqi: AQIResult, data: PollutantData): Promise<AIAnalysis> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const apiKey = process.env.API_KEY;
+  
+  if (!apiKey || apiKey === 'your_actual_api_key_here') {
+    console.warn("Gemini API Key is missing or default. Please update the .env file with your actual API_KEY.");
+    return {
+      healthAdvice: "Please configure your Gemini API Key in the .env file to receive personalized AI health insights.",
+      precautions: ["Check your .env file", "Ensure API_KEY variable is set", "Restart the application"],
+      impactSummary: "AI analysis is currently unavailable due to missing credentials."
+    };
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   
   const prompt = `
     As an environmental health expert specializing in Indian air quality standards, analyze this specific reading:
@@ -17,13 +28,13 @@ export const getAIAnalysis = async (aqi: AQIResult, data: PollutantData): Promis
     PM2.5: ${data.pm25} µg/m³
     PM10: ${data.pm10} µg/m³
     NO2: ${data.no2} µg/m³
-    NH3 (Ammonia): ${data.nh3} µg/m³
+    NH3: ${data.nh3} µg/m³
     SO2: ${data.so2} µg/m³
     CO: ${data.co} mg/m³
     O3: ${data.o3} µg/m³
 
     Provide a professional analysis in JSON focusing on:
-    1. healthAdvice: Specific advice (consider location/time if provided, e.g., traffic peak or morning fog).
+    1. healthAdvice: Specific advice for people in this location.
     2. precautions: 3-4 actionable steps.
     3. impactSummary: 1-sentence environmental summary.
   `;
